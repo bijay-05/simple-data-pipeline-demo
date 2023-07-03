@@ -1,7 +1,7 @@
 from configparser import ConfigParser
 
 
-def config(filename='database.ini', section='postgresql'):
+def get_keys(filename='database.ini', section='postgresql'):
     """
     This function takes a file and section (in file)
     as input and returns a dictionary with creds for
