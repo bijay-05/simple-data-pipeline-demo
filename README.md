@@ -7,3 +7,7 @@ We will connect to a secondary postgreSQL database in production which contains 
 store's primary database in synchronization. Here we will use a separate python scripts for extracting and loading the 
 data. While data is in transition, it is kept in the memory of machine where python script is running and after extraction 
 is completed, then it is loaded into object storage such as **AWS S3** 
+
+
+For extracting the data, we will use `polars.read_database()` function from **Polars**. This function accepts
+a string `connection_uri` and an SQL query string
