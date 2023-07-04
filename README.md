@@ -13,4 +13,5 @@ is completed, then it is loaded into object storage such as **AWS S3**
 
 
 For extracting the data, we will use `polars.read_database()` function from **Polars**. This function accepts
-a string `connection_uri` and an SQL query string
+a string `connection_uri` and an SQL query string. We will filter the data in database through SQL query and 
+only request the data for previous day's sales ( we can request data for any day of the year as well).
