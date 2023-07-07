@@ -18,7 +18,7 @@ What columns does a sales_table need to have ???
 - TOTAL_PRICE: FLOAT, NOT NULL
 
 What columns does a products_table need to have ???
-- product_id : PRIMARY KEY, NOT NULL, INT
+- product_id : PRIMARY KEY, NOT NULL, INT, FOREIGN KEY (sales_table)
 - product_category : VARCHAR, NOT NULL
 - product_name : VARCHAR, NOT NULL
 - supplier_name : VARCHAR, NOT NULL

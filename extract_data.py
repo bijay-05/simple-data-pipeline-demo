@@ -45,9 +45,15 @@ def get_data(conn_string: str, table_name: str, output_format: int):
     # output the data from database into file
     if output_format == 0:
         dataframe.write_csv(file=f"{table_name}_file.csv", has_header=True)
-        return "DONE !! Data written to file CSV"
+        return dataframe
     elif output_format == 1:
         dataframe.write_parquet(f"{table_name}_file.parquet")
-        return "DONE !! Data written to file PARQUET"
+        return dataframe
     else:
         print("Choose one of the output formats available")
+
+def data_checks(dataframe: pl.dataframe):
+    """
+    This function takes the dataframe, and performs transformations
+    on it and returns the status of function completion
+    """
