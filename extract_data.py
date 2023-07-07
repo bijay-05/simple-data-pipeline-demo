@@ -52,8 +52,3 @@ def get_data(conn_string: str, table_name: str, output_format: int):
     else:
         print("Choose one of the output formats available")
 
-def data_checks(dataframe: pl.dataframe):
-    """
-    This function takes the dataframe, and performs transformations
-    on it and returns the status of function completion
-    """
