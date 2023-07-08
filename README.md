@@ -4,12 +4,10 @@ In order to gain a working idea of data pipeline and to simply start the learnin
  as simple as possible.
 
 The Source: A PostgreSQL database (sales_database) is the source of our data pipeline. The database has a `sales_table`
-, which keeps record of daily sales at the store. We have two databases ( primary and secondary inorder to simulate production
-scenario )
+, which keeps record of daily sales at the store. We have two databases ( primary and secondary ) inorder to simulate production
+scenario.
 
-We will connect to a secondary postgreSQL database in production. Here we will use a separate python scripts for extracting and loading the 
-data. While data is in transition, it is kept in the memory of machine where python script is running & output as CSV file and after extraction 
-is completed, then it is loaded into object storage such as **AWS S3** 
+We will connect to a secondary postgreSQL database in production. Here we will use a separate python scripts for extracting and loading the data. While data is in transition, it is kept in the memory of machine where python script is running & output as CSV file and after extraction is completed, then it is loaded into cloud data warehouse **Snowflake**. Besides this, during extraction of the data we will perform few data checks to ensure data quality before writing data to warehouse.
 
 
 For extracting the data, we will use `polars.read_database()` function from **Polars**. This function accepts
