@@ -1,9 +1,9 @@
 from configparser import ConfigParser
 import polars as pl
 
-def get_keys(filename='database.ini', section='postgresql'):
+def get_keys(filename: str, section: str):
     """
-    This function takes a file and section (in file)
+    This function takes strings of file and section (in file)
     as input and returns a dictionary with creds for
     connecting to a database server
     """
@@ -23,7 +23,7 @@ def get_keys(filename='database.ini', section='postgresql'):
 
     return db_keys
 
-def get_connection(keys : dict) -> str :
+def get_conn_str(keys : dict) -> str :
     """
     This function takes a dictionary of values (keys)
     for making connection to a database and returns a
