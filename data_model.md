@@ -13,7 +13,7 @@ What columns does a sales_table need to have ???
 
 - sale_id : PRIMARY KEY, SERIAL, NOT NULL
 - date_time: TIMESTAMP, DEFAULT NOW(), NOT NULL
-- customer_id: INT , DEFAULT 0 (NON-MEMBER), NOT NULL
+- customer_id: INT , NOT NULL
 - product_id: INT, NOT NULL, FOREIGN KEY (products_table)
 - QUANTITY: INT, NOT NULL
 - UNIT_PRICE: FLOAT, NOT NULL
