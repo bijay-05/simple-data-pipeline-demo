@@ -26,7 +26,7 @@ What columns does a products_table need to have ???
 - supplier_name : VARCHAR, NOT NULL
 
 What columns does a customers_table need to have ??
-- customer_id : PRIMARY KEY, SERIAL, NOT NULL, FOREIGN kEY (sales_table)
+- customer_id : PRIMARY KEY, SERIAL, NOT NULL, FOREIGN KEY (sales_table)
 - cust_fname : VARCHAR, NOT NULL
 - cust_lname : VARCHAR, NOT NULL
 - cust_phone :INT, NOT NULL
