@@ -18,7 +18,7 @@ def main(source_keys: str, target_keys: str, datetime: str):
     extraction_status = get_data(conn_string=connection_str,table_name="sales_table",datetime=datetime)
     print(extraction_status)
     print("\n\n\n")
-    
+
     target_db_keys = get_keys(filename=target_keys)
     connection = get_connection(connection_keys=target_db_keys)
     loading_status = load_data(connection=connection)
@@ -32,17 +32,13 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--source-keys",
-        help="the filename with credentials for connecting to db"
-    )
-    parser.add_argument(
-        "--target-keys",
+        "--source_keys",
         help="the filename with credentials for connecting to db"
     )
 
     parser.add_argument(
-        "--section",
-        help="the section in filename describing database engine"
+        "--target_keys",
+        help="the filename with credentials for connecting to db"
     )
 
     parser.add_argument(
@@ -52,4 +48,4 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    main(source_keys=args.source_keys, section=args.section, datetime=args.datetime)
+    main(source_keys=args.source_keys, target_keys=args.target_keys, datetime=args.datetime)
