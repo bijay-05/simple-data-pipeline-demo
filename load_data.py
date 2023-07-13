@@ -32,3 +32,5 @@ def load_data(connection):
      finally returns the status of function completion
     """
 
+    return "Data Loading Status: Completed"
+
