@@ -35,13 +35,13 @@ def get_conn_str(keys : dict) -> str :
     """
     return f"postgres://{keys[user]}:{keys[password]}@{keys[host]}:{keys[port]}/{keys[database]}"
 
-def get_data(conn_string: str, table_name: str, output_format: int):
+def get_data(conn_string: str, table_name: str, output_format: int,datetime: str):
     """
     This function takes connection_string, table_name and
     output_format as inputs and outputs the success of the function
     output_format is integer value indicating 0: CSV and 1: PARQUET
     """
-    query = "SELECT * FROM public"+table_name
+    query = f"SELECT * FROM public.{table_name} WHERE date = {datetime}"
     
     # read the data from database into dataframe
     dataframe = pl.read_database(connection_uri=conn_string, query=query)
