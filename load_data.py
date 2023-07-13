@@ -1,7 +1,6 @@
 import snowflake.connector
 import polars as pl
 
-from extract_data import get_keys
 
 def get_connection(connection_keys: dict):
     """
