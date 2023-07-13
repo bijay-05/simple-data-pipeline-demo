@@ -14,7 +14,11 @@ def get_keys(filename: str, section: str):
 
     # get section, default to postgresql
     db_keys = {}
-    if parser.has_section(section):
+    if parser.has_section(section) and section == "postgres":
+        params = parser.items(section)
+        for param in params:
+            db_keys[param[0]] = param[1]
+    elif parser.has_section(section) and section == "snowflake":
         params = parser.items(section)
         for param in params:
             db_keys[param[0]] = param[1]
