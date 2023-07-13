@@ -14,12 +14,12 @@ def get_keys(filename: str, section: str):
 
     # get section, default to postgresql
     db_keys = {}
-    if parser.has_section(section) and section == "postgres":
-        params = parser.items(section)
+    if "postgres" in parser.sections():
+        params = parser.items("postgres")
         for param in params:
             db_keys[param[0]] = param[1]
-    elif parser.has_section(section) and section == "snowflake":
-        params = parser.items(section)
+    elif "snowflake" in parser.sections():
+        params = parser.items("snowflake")
         for param in params:
             db_keys[param[0]] = param[1]
     else:
@@ -48,11 +48,11 @@ def get_data(conn_string: str, table_name: str, output_format: int,datetime: str
 
     # output the data from database into file
     if output_format == 0:
-        dataframe.write_csv(file=f"{table_name}_file.csv", has_header=True)
-        return dataframe
+        dataframe.write_csv(file=f"{table_name}_{datetime}_file.csv", has_header=True)
+        return "Data Extraction Status: Completed"
     elif output_format == 1:
-        dataframe.write_parquet(f"{table_name}_file.parquet")
-        return dataframe
+        dataframe.write_parquet(f"{table_name}_{datetime}_file.parquet")
+        return "Data Extraction Status: Completed"
     else:
         print("Choose one of the output formats available")
 
