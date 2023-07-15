@@ -13,7 +13,7 @@ What columns does a sales_table need to have ???
 
 - sale_id : PRIMARY KEY, SERIAL, NOT NULL
 - date_time: TIMESTAMP, DEFAULT NOW(), NOT NULL
-- customer_id: INT , DEFAULT 0 (NON-MEMBER), NOT NULL
+- cust_id: INT , DEFAULT 0 (NON-MEMBER), NOT NULL
 - product_id: INT, NOT NULL, FOREIGN KEY (products_table)
 - QUANTITY: INT, NOT NULL
 - UNIT_PRICE: FLOAT, NOT NULL
@@ -26,7 +26,7 @@ What columns does a products_table need to have ???
 - supplier_name : VARCHAR, NOT NULL
 
 What columns does a customers_table need to have ??
-- customer_id : PRIMARY KEY, SERIAL, NOT NULL, FOREIGN KEY (sales_table)
+- cust_id : PRIMARY KEY, SERIAL, NOT NULL, FOREIGN KEY (sales_table)
 - cust_fname : VARCHAR, NOT NULL
 - cust_lname : VARCHAR, NOT NULL
 - cust_phone :INT, NOT NULL
