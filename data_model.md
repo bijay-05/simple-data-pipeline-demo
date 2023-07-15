@@ -7,7 +7,7 @@ Here we will consider a sale of single kind of product (i.e same product_id) as
 a single transaction in the sales_table. There is another products_table, which relates to 
 sales_table through `product_id` field. We do have a customers table, for those
 who have taken customer membership but non-member customers all have default
-`customer_id` 0
+`cust_id` 0
 
 What columns does a sales_table need to have ???
 
@@ -15,15 +15,15 @@ What columns does a sales_table need to have ???
 - date_time: TIMESTAMP, DEFAULT NOW(), NOT NULL
 - cust_id: INT , DEFAULT 0 (NON-MEMBER), NOT NULL
 - product_id: INT, NOT NULL, FOREIGN KEY (products_table)
-- QUANTITY: INT, NOT NULL
-- UNIT_PRICE: FLOAT, NOT NULL
-- TOTAL_PRICE: FLOAT, NOT NULL
+- quantity: INT, NOT NULL
+- unit_price: FLOAT, NOT NULL
+- total_price: FLOAT, NOT NULL
 
 What columns does a products_table need to have ???
 - product_id : PRIMARY KEY, NOT NULL, INT, FOREIGN KEY (sales_table)
-- product_category : VARCHAR, NOT NULL
-- product_name : VARCHAR, NOT NULL
-- supplier_name : VARCHAR, NOT NULL
+- product_category : VARCHAR(20), NOT NULL
+- product_name : VARCHAR(20), NOT NULL
+- supplier_name : VARCHAR(20), NOT NULL
 
 What columns does a customers_table need to have ??
 - cust_id : PRIMARY KEY, SERIAL, NOT NULL, FOREIGN KEY (sales_table)
