@@ -14,3 +14,5 @@ We will connect to a secondary postgreSQL database in production. Here we will u
 For extracting the data, we will use `polars.read_database()` function from **Polars**. This function accepts
 a string `connection_uri` and an SQL query string. We will filter the data in database through SQL query and 
 only request the data for previous day's sales ( we can request data for any day of the year as well).
+
+![pipeline_demo](https://github.com/bijay-05/simple-data-pipeline-demo/assets/86017045/830ff883-f777-47c6-8389-14fe7d1fcf88)
