@@ -31,3 +31,6 @@ What columns does a customers_table need to have ??
 - cust_lname : VARCHAR, NOT NULL
 - cust_phone :INT, NOT NULL
 - cust_address: VARCHAR, NOT NULL
+
+## Entity relationship diagram
+![Entity relation Diagram](https://github.com/bijay-05/simple-data-pipeline-demo/assets/86017045/db20ee03-bc28-4b50-94d6-fc5fa6aa8487)
