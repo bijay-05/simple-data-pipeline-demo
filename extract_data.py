@@ -41,7 +41,7 @@ def get_data(conn_string: str, table_name: str, output_format: int,datetime: str
     output_format as inputs and outputs the success of the function
     output_format is integer value indicating 0: CSV and 1: PARQUET
     """
-    query = f"SELECT * FROM public.{table_name} WHERE date = {datetime}"
+    query = f"SELECT * FROM public.{table_name} WHERE date LIKE {datetime}+'*'"
     
     # read the data from database into dataframe
     dataframe = pl.read_database(connection_uri=conn_string, query=query)
