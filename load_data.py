@@ -1,4 +1,4 @@
-import snowflake.connector
+from snowflake.snowpark import Session
 import polars as pl
 
 
@@ -7,30 +7,18 @@ def get_connection(connection_keys: dict):
     This function takes dictionary of keys as input 
     and returns a connection object to snowflake datawarehouse
     """
-    account = connection_keys["account"]
-    user = connection_keys["user"]
-    password = connection_keys["password"]
-    warehouse = connection_keys["warehouse"]
-    database = connection_keys["database"]
-    table = connection_keys["table"]
 
     # Establish the connection
-    connection = snowflake.connector.connect(
-        user=user,
-        password=password,
-        account=account
-        warehouse=warehouse,
-        database=database
-    )
+    new_session = Session.builder.configs(connection_parameters).create()  
 
-    return connection
+    return new_session
 
-def load_data(connection):
+def load_data(session: Session):
     """
-    This function takes connection object to snowflake as 
+    This function takes session object  as 
     input and performs the loading of data into warehouse,
      finally returns the status of function completion
     """
-
+    session.create(df)
     return "Data Loading Status: Completed"
 
