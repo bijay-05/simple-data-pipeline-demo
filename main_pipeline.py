@@ -21,7 +21,7 @@ def main(source_keys: str, target_keys: str, datetime: str):
 
     target_db_keys = get_keys(filename=target_keys)
     connection = get_connection(connection_keys=target_db_keys)
-    loading_status = load_data(connection=connection)
+    loading_status = load_data(connection=connection,datetime=datetime)
     print(loading_status)
 
 
