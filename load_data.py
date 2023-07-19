@@ -1,5 +1,6 @@
-import snowflake.connector
-import polars as pl
+import snowflake.connector as snow
+from snowflake.connector.pandas_tools import write_pandas
+import pandas as pd
 
 
 def get_connection(connection_keys: dict):
@@ -15,22 +16,36 @@ def get_connection(connection_keys: dict):
     table = connection_keys["table"]
 
     # Establish the connection
-    connection = snowflake.connector.connect(
+    connection = snow.connect(
         user=user,
         password=password,
-        account=account
-        warehouse=warehouse,
+        account=account,
         database=database
     )
 
     return connection
 
-def load_data(connection):
+def load_data(connection: snow.connect(), datetime:str):
     """
-    This function takes connection object to snowflake as 
+    This function takes connection object  as 
     input and performs the loading of data into warehouse,
      finally returns the status of function completion
     """
 
+    #read data from CSV (extract_data.py)
+    df = pd.read_csv("./sales_table_{datetime}_file.csv",delimiter=',', header=0) # header=0 means first line as columns
+    
+    # get the cursor
+    cursor = connection.cursor()
+    try:
+        cursor.execute(f"create table IF NOT EXISTS sales_table_{datetime}")
+        write_pandas(connection,df,f"sales_table_{datetime}")
+        result = cursor.execute(f"select count(*) from sales_table_{datetime}").fetchone()
+        print("Number of rows in table: ",result)
+    finally:
+        connection.close()
+    
     return "Data Loading Status: Completed"
+
+    
 
