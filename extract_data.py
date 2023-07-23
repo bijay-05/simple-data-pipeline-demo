@@ -15,9 +15,9 @@ def get_keys(filename: str) -> dict:
     # get section, default to postgresql
     db_keys = {}
     if "postgres" in parser.sections():
-        params = parser.items("postgres")
+        params = parser.items("postgres") # params is a list of tuples
         for param in params:
-            db_keys[param[0]] = param[1]
+            db_keys[param[0]] = param[1] # param is a tuple (key,value)
     elif "snowflake" in parser.sections():
         params = parser.items("snowflake")
         for param in params:
