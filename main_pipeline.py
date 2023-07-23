@@ -1,5 +1,4 @@
 import argparse
-
 from extract_data import get_conn_str,get_data,get_keys
 from load_data import get_connection,load_data
 
@@ -7,7 +6,7 @@ from load_data import get_connection,load_data
 # complete the flow of data from production OLTP database to
 # OLAP data warehouse in Snowflake.
 
-def main(source_keys: str, target_keys: str, datetime: str):
+def main(source_keys: str, target_keys: str, last_date: str) -> str:
     """
     This is main function which incorporates all the other 
     helper functions from extract and load scripts, and completes 
@@ -15,14 +14,16 @@ def main(source_keys: str, target_keys: str, datetime: str):
     """
     database_keys = get_keys(filename=source_keys)
     connection_str = get_conn_str(keys=database_keys)
-    extraction_status = get_data(conn_string=connection_str,table_name="sales_table",datetime=datetime)
+    extraction_status = get_data(conn_string=connection_str, table_name="sales_table", output_format=0, last_date=last_date)
     print(extraction_status)
     print("\n\n\n")
 
     target_db_keys = get_keys(filename=target_keys)
     connection = get_connection(connection_keys=target_db_keys)
-    loading_status = load_data(connection=connection,datetime=datetime)
+    loading_status = load_data(connection=connection, last_date=last_date)
     print(loading_status)
+
+    return "Pipeline run completed"
 
 
 
@@ -30,7 +31,7 @@ def main(source_keys: str, target_keys: str, datetime: str):
 
 if __name__ == '__main__':
 
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser() # the argparse treats all arguments as strings unless specified
     parser.add_argument(
         "--source_keys",
         help="the filename with credentials for connecting to db"
