@@ -1,7 +1,7 @@
 from configparser import ConfigParser
 import polars as pl
 
-def get_keys(filename: str, section: str):
+def get_keys(filename: str) -> dict:
     """
     This function takes strings of file and section (in file)
     as input and returns a dictionary with creds for
@@ -15,9 +15,9 @@ def get_keys(filename: str, section: str):
     # get section, default to postgresql
     db_keys = {}
     if "postgres" in parser.sections():
-        params = parser.items("postgres")
+        params = parser.items("postgres") # params is a list of tuples
         for param in params:
-            db_keys[param[0]] = param[1]
+            db_keys[param[0]] = param[1] # param is a tuple (key,value)
     elif "snowflake" in parser.sections():
         params = parser.items("snowflake")
         for param in params:
@@ -33,31 +33,28 @@ def get_conn_str(keys : dict) -> str :
     for making connection to a database and returns a
     connection string (for polars.read_database function)
     """
-    return f"postgres://{keys[user]}:{keys[password]}@{keys[host]}:{keys[port]}/{keys[database]}"
+    return f"postgres://{keys['user']}:{keys['password']}@{keys['host']}:{keys['port']}/{keys['database']}"
 
-def get_data(conn_string: str, table_name: str, output_format: int,datetime: str):
+def get_data(conn_string: str, table_name: str, output_format: int, last_date: str) -> str:
     """
-    This function takes connection_string, table_name and
-    output_format as inputs and outputs the success of the function
+    This function takes connection_string, table_name, output_format
+    and  last_date (last day when the pipeline ran) as inputs and outputs the status  of the function
     output_format is integer value indicating 0: CSV and 1: PARQUET
     """
-    query = f"SELECT * FROM public.{table_name} WHERE date LIKE {datetime}+'*'"
+    query = f"SELECT * FROM public.{table_name} WHERE date_time > ('{last_date}')"
     
     # read the data from database into dataframe
     dataframe = pl.read_database(connection_uri=conn_string, query=query)
+    
 
     # output the data from database into file
     if output_format == 0:
-        dataframe.write_csv(file=f"{table_name}_{datetime}_file.csv", has_header=True)
+        dataframe.write_csv(file=f"{table_name}_after_{last_date}_file.csv", has_header=True)
         return "Data Extraction Status: Completed"
     elif output_format == 1:
-        dataframe.write_parquet(f"{table_name}_{datetime}_file.parquet")
+        dataframe.write_parquet(f"{table_name}_after_{last_date}_file.parquet")
         return "Data Extraction Status: Completed"
     else:
         print("Choose one of the output formats available")
-
-def data_checks(dataframe: pl.dataframe):
-    """
-    This function takes the dataframe, and performs transformations
-    on it and returns the status of function completion
-    """
+        return
+    
