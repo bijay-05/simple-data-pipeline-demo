@@ -33,7 +33,7 @@ def get_conn_str(keys : dict) -> str :
     for making connection to a database and returns a
     connection string (for polars.read_database function)
     """
-    return f"postgres://{keys[user]}:{keys[password]}@{keys[host]}:{keys[port]}/{keys[database]}"
+    return f"postgres://{keys['user']}:{keys['password']}@{keys['host']}:{keys['port']}/{keys['database']}"
 
 def get_data(conn_string: str, table_name: str, output_format: int, last_date: str) -> str:
     """
