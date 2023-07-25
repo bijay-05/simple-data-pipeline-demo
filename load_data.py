@@ -11,9 +11,7 @@ def get_connection(connection_keys: dict):
     account = connection_keys["account"]
     user = connection_keys["user"]
     password = connection_keys["password"]
-    warehouse = connection_keys["warehouse"]
     database = connection_keys["database"]
-    table = connection_keys["table"]
 
     # Establish the connection
     connection = snow.connect(
@@ -40,9 +38,9 @@ def load_data(connection: snow.connect(), last_date:str) -> str:
     try:
         cursor.execute("USE DATABASE daily_sales")
         cursor.execute(f"create table IF NOT EXISTS sales_table_after_{last_date}")
-        write_pandas(connection,df,f"sales_table_after_{last_date}")
-        result = cursor.execute(f"select count(*) from sales_table_after_{last_date}").fetchone()
-        print("Number of rows in table: ",result)
+
+        status, nchunks, nrows,_ = write_pandas(connection,df,f"sales_table_after_{last_date}") # _ is the output of COPY cmd being executed in database
+        print(f"Status of the function: {status}\n number of rows inserted: {nrows}")
     finally:
         connection.close()
     
