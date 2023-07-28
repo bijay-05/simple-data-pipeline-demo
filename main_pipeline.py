@@ -19,8 +19,15 @@ def main(source_keys: str, target_keys: str, last_date: str) -> str:
     print("\n\n\n")
 
     target_db_keys = get_keys(filename=target_keys)
-    connection = get_connection(connection_keys=target_db_keys)
-    loading_status = load_data(connection=connection, last_date=last_date)
+    connection_obj = get_connection(connection_keys=target_db_keys)
+
+    if connection_obj is None:
+        print("Connection is None")
+        return "shit happens !!!"
+    else:
+        print(type(connection_obj))
+    
+    loading_status = load_data(connection=connection_obj, last_date=last_date)
     print(loading_status)
 
     return "Pipeline run completed"
@@ -43,10 +50,10 @@ if __name__ == '__main__':
     )
 
     parser.add_argument(
-        "--datetime",
-        help="get the data of the specified date of the day"
+        "--lastdate",
+        help="date when the pipeline ran last time"
     )
 
     args = parser.parse_args()
 
-    main(source_keys=args.source_keys, target_keys=args.target_keys, datetime=args.datetime)
+    main(source_keys=args.source_keys, target_keys=args.target_keys, last_date=args.lastdate)
