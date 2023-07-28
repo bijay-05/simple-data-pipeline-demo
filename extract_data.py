@@ -14,8 +14,8 @@ def get_keys(filename: str) -> dict:
 
     # get section, default to postgresql
     db_keys = {}
-    if "postgres" in parser.sections():
-        params = parser.items("postgres") # params is a list of tuples
+    if "postgresql" in parser.sections():
+        params = parser.items("postgresql") # params is a list of tuples
         for param in params:
             db_keys[param[0]] = param[1] # param is a tuple (key,value)
     elif "snowflake" in parser.sections():
@@ -23,7 +23,7 @@ def get_keys(filename: str) -> dict:
         for param in params:
             db_keys[param[0]] = param[1]
     else:
-        raise Exception('Section {0} not found in the {1} file'.format(section, filename))
+        raise Exception("File and/or section not found !!! ")
 
     return db_keys
 
