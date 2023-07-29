@@ -56,4 +56,4 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    main(source_keys=args.source_keys, target_keys=args.target_keys, last_date=args.lastdate)
+    print(main(source_keys=args.source_keys, target_keys=args.target_keys, last_date=args.lastdate))
