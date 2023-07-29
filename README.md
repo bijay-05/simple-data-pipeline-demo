@@ -16,3 +16,7 @@ a string `connection_uri` and an SQL query string. We will filter the data in da
 only request the data since the pipeline ran last time by passing `last_date` argument to main script. And during
 loading, we first load data into pandas dataframe, then the `write_pandas` function from `snowflake.connector` module which accepts connection object to snowflake,
  dataframe to be loaded into warehouse and table name as input, copies data into selected warehouse.
+ 
+
+![pipeline_demo](https://github.com/bijay-05/simple-data-pipeline-demo/assets/86017045/830ff883-f777-47c6-8389-14fe7d1fcf88)
+
