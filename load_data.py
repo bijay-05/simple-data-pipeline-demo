@@ -48,7 +48,7 @@ def load_data(connection, last_date:str) -> str:
         cursor.execute("USE SCHEMA SALES_ANALYTICS_DWH.SALES")
         cursor.execute("""create table IF NOT EXISTS sales_table(sale_id INT NOT NULL, \
                        date_time TIMESTAMP NOT NULL, cust_id INT NOT NULL, product_id INT NOT NULL, \
-                       quantity INT NOT NULL, unit_price INT NOT NULL, total_price INT NOT NULL)""")
+                       quantity INT NOT NULL, unit_price NUMBER(4,0) NOT NULL, total_price NUMBER(6,0) NOT NULL)""")
 
         status, nchunks, nrows,_ = write_pandas(connection, df, "sales_table", quote_identifiers=False) # _ is the output of COPY cmd being executed in database
         print(f"Status of the function: {status}\n number of rows inserted: {nrows}")
